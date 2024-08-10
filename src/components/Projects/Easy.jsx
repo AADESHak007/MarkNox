@@ -1,13 +1,34 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import rightArrow from "../../images/rightarrow.svg";
 import premier from "../../images/premier.png";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
+gsap.registerPlugin(ScrollTrigger);
 const Easy = ({ openMenu, setOpenMenu }) => {
   const pageRef = useRef(null);
-  const TextRef = useRef(null);
+  const TextRef = useRef();
   const ImageRef = useRef(null);
+  const ref = useRef(null);
+  const onScreen = useIntersectionObserver(ref, 0.2);
+
+  useEffect(()=>{
+    if (onScreen) {
+      console.log("onScreen")
+      gsap.from(ref.current,{
+        y:100,
+        duration:0.5,
+        delay:0.3,
+        opacity:0,
+        stagger:0.5
+      })
+    }
+  },[onScreen])
+
 
   return (
     <div
@@ -20,7 +41,7 @@ const Easy = ({ openMenu, setOpenMenu }) => {
           <Navbar openMenu={openMenu} setOpenMenu={setOpenMenu} />
           <div
             className="hero flex flex-col gap-4 lg:ml-16 h-full w-full justify-center px-2 lg:px-0"
-            ref={TextRef}
+            ref={ref}
           >
             <h2 className="text-3xl text-zinc-300 underline lg:no-underline">
               Website
@@ -37,6 +58,17 @@ const Easy = ({ openMenu, setOpenMenu }) => {
             <p className="lg:hidden w-full text-justify">
              
             </p>
+            <section className="flex justify-start w-96 gap-2 p-2">
+            <a
+              href="https://github.com/AADESHak007/Premier-layout"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="bg-white text-[#222222] py-3 w-max flex items-center gap-2 px-8 font-[avenir-black] text-sm lg:text-base">
+                GITHUB
+                <img src={rightArrow} alt="right arrow" />
+              </button>
+            </a>
             <a
               href="https://aadeshak007.github.io/Premier-layout/"
               target="_blank"
@@ -47,6 +79,7 @@ const Easy = ({ openMenu, setOpenMenu }) => {
                 <img src={rightArrow} alt="right arrow" />
               </button>
             </a>
+            </section>
           </div>
           <Footer />
         </div>

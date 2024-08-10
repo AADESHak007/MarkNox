@@ -37,7 +37,7 @@ const HeroSection = ({ openMenu, setOpenMenu, isLoaded }) => {
 
       <div className="h-full w-full flex flex-col justify-center py-2 px-4 lg:px-10 lg:py-6">
         <div className="heroSection flex flex-col gap-4 lg:ml-16">
-          <h2 className="text-zinc-600 font-semibold text-4xl">MERN Developer</h2>
+          <h2 className="text-green-600 font-semibold text-4xl">MERN Developer</h2>
           <h1 className="text-6xl font-bold font-[avenir-black]">
            AADESH KUMAR
           </h1>
